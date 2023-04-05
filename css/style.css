@@ -138,9 +138,26 @@ body {
   text-align: end;
  }
 
+ .search-container form input {
+  font-size: 18px;
+  padding: 4px;
+  border-width: 2px;
+  border-color: #c3a23e;
+ }
+
  .search-container input::placeholder{
    color: #9e9ea7;
  }
+
+ /*search items*/
+
+ .searched-items-display #searched-art-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 20px;
+  margin-top: 150px;
+ }
+
   /* loader */
   
 
