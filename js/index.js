@@ -51,6 +51,11 @@ const renderArtItems = function (artItems) {
             <img src='${imageSrc}' alt="${artItem.thumbnail.alt_text}" id="art-item-image">
             <h3 id="art-item-title">${artItem.title}</h3>
             <h4 id="art-item-artist-display">by: <span id='artist-name'>${artItem.artist_display}</span></h4>
+            <div class='buttons'>
+            <button id='like'>like</button>
+            <button id='share'>share</button>
+            <button id='download'>download</button>
+            </div>
         </div>
         `
         artList.appendChild(artListItem)
