@@ -27,7 +27,7 @@
                 <div class="text-blocks">
                     <h1 class="page-heading">Welcome to <span id="page-name">ArtMingle</span></h1>
                     <p class="quote">“Every artist dips his brush in his own soul, and paints his <br>own nature into his pictures.”<br><span id="author">Vincent van Goph</span></p>
-                    <a href="#">View Gallery</a>
+                    <a href="#gallery">View Gallery</a>
                 </div>
 
                 <div class="image-box">
@@ -35,12 +35,16 @@
                 </div>
             </div>
             
-            <div class="container">
+            <div class="container" id="gallery">
                 <div class="search-container">
                     <form>
-                        <input required="" pattern=".*\S.*" type="search" class="input" id="search" placeholder="Search">
+                        <input required="" pattern=".*\S.*" type="search" class="input" id="search" placeholder="Search" data-search>
                         <span class="caret"></span>
                     </form>
+                </div>
+                <div class="searched-items-display">
+                    <h3 id="searched-items-header"></h3>
+                    <ul id = "searched-art-list"></ul>
                 </div>
                 <ul class="art-list">
                     
