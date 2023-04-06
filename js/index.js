@@ -56,9 +56,9 @@ const renderArtItems = function (artItems) {
             <h3 id="art-item-title">${artItem.title}</h3>
             <h4 id="art-item-artist-display">by: <span id='artist-name'>${artItem.artist_display}</span></h4>
             <div class='buttons'>
-            <button id='like'><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
-            <button id='share'><i class="fa fa-share-alt" aria-hidden="true"></i></button>
-            <button id='download'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
+                <button id='like'><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+                <button id='share'><i class="fa fa-share-alt" aria-hidden="true"></i></button>
+                <button id='download'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
             </div>
         </div>
         `
