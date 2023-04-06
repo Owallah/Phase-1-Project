@@ -6,6 +6,10 @@ const searchedArtList = document.querySelector('#searched-art-list');
 const form = document.querySelector('form');
 const input = document.querySelector('input');
 
+
+
+let isLiked = false
+
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault()
     fetchArtItems()
@@ -56,14 +60,34 @@ const renderArtItems = function (artItems) {
             <h3 id="art-item-title">${artItem.title}</h3>
             <h4 id="art-item-artist-display">by: <span id='artist-name'>${artItem.artist_display}</span></h4>
             <div class='buttons'>
-                <button id='like'><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+                <button class='like'><span id="like-icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span> <span id="like-count">0</span></button>
                 <button id='share'><i class="fa fa-share-alt" aria-hidden="true"></i></button>
                 <button id='download'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
             </div>
         </div>
         `
+        let likeBtn = artListItem.querySelector('.like')
+        likeBtn.addEventListener('click', () => {
+            console.log(`liked`);
+
+            let likeIcon = likeBtn.querySelector('#like-icon')
+            let likeCount = likeBtn.querySelector('#like-count')
+            if (!isLiked) {
+                likeIcon.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+                likeCount.textContent++
+                isLiked = true
+                // isLiked = 
+            }
+            else {
+                likeIcon.innerHTML = `<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>`
+                likeCount.textContent--
+                isLiked = false
+            }
+            // likeClick()
+            
+        })
         artList.appendChild(artListItem)
-        return {title: artItem.title, artist: artItem.artist_display, element: artListItem}
+        // return {title: artItem.title, artist: artItem.artist_display, element: artListItem}
     });
 }
 
@@ -110,6 +134,13 @@ function renderSearchedArtItems(searchedItems) {
         searchedArtList.appendChild(artListItem)
     });
 };
+
+/**
+ * The following function handles clicking like
+ */
+const likeClick = () => {
+   
+}
 
 
 // const searchArtItem = function (searchValue) {
