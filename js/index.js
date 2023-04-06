@@ -60,9 +60,9 @@ const renderArtItems = function (artItems) {
             <h3 id="art-item-title">${artItem.title}</h3>
             <h4 id="art-item-artist-display">by: <span id='artist-name'>${artItem.artist_display}</span></h4>
             <div class='buttons'>
-                <button class='like'><span id="like-icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span> <span id="like-count">0</span></button>
+                <button class='like'><span id="like-icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></button>
                 <button id='share'><i class="fa fa-share-alt" aria-hidden="true"></i></button>
-                <button id='download'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
+                <a href="${imageSrc}" download = "art.jpg"id='download'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
             </div>
         </div>
         `
@@ -71,20 +71,23 @@ const renderArtItems = function (artItems) {
             console.log(`liked`);
 
             let likeIcon = likeBtn.querySelector('#like-icon')
-            let likeCount = likeBtn.querySelector('#like-count')
+            let count = 0
             if (!isLiked) {
                 likeIcon.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-                likeCount.textContent++
                 isLiked = true
                 // isLiked = 
             }
             else {
                 likeIcon.innerHTML = `<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>`
-                likeCount.textContent--
                 isLiked = false
             }
             // likeClick()
             
+        })
+
+        let downloadBtn = artListItem.querySelector('#download')
+        downloadBtn.addEventListener('click', () => {
+            console.log('success');
         })
         artList.appendChild(artListItem)
         // return {title: artItem.title, artist: artItem.artist_display, element: artListItem}
@@ -138,121 +141,16 @@ function renderSearchedArtItems(searchedItems) {
 /**
  * The following function handles clicking like
  */
-const likeClick = () => {
-   
+const download = function (data, name = "image.png") {
+    const blob = new Blob([data], { type: "image/png"})
+
+    const href = URL.createObjectURL(blob)
+
+    const a = Object.assign(document.querySelector("#download"), {
+        href,
+        download: name,
+    })
+    URL.revokeObjectURL(href)
+    return a
 }
-
-
-// const searchArtItem = function (searchValue) {
-//     let searchPath = `https://api.artic.edu/api/v1/artworks/search?q=${searchValue}&&fields=id`
-//     return fetch(searchPath)
-//     .then(response => response.json())
-//     .then(res => {
-//         console.log(res.data);
-//         fetchSearchedItems(res.data)
-//     })
-//     .catch(error => console.error(error.message))
-// }
-
-// /**
-//  * the following function fetches the searched items
-//  */
-// const fetchSearchedItems = function (response) {
-//     response.forEach(element => {
-//         let apiPath = `https://api.artic.edu/api/v1/artworks/${element.id}`
-//         return fetch(apiPath)
-//         .then(res => res.json())
-//         .then(jsonData => {
-//             // console.log(data);
-//             renderSearchedArtItems(jsonData.data)
-//         })
-//     });
-    
-    
-    
-// }
-
-// /**
-//  * the following functionrenders the seached items
-//  */
-
-// function renderSearchedArtItems(searchedItems) {
-
-//     let searchedArtList = document.querySelector('#searched-art-list')
-//         console.log(searchedItems.title);
-        
-//         let imageSrc = `https://www.artic.edu/iiif/2/${searchedItems.image_id}/full/843,/0/default.jpg`
-
-//         let artListItem = document.createElement('li')
-//         artListItem.className = `artListItem`
-//         artListItem.innerHTML = `
-//         <div class="art-item shadow">
-//             <img src='${imageSrc}' alt="${searchedItems.thumbnail.alt_text}" id="art-item-image">
-//             <h3 id="art-item-title">${searchedItems.title}</h3>
-//             <h4 id="art-item-artist-display">by: <span id='artist-name'>${searchedItems.artist_display}</span></h4>
-//         </div>
-//         `
-//         searchedArtList.appendChild(artListItem)
-        
-//     };
-
-
-
-// const myApi = 'https://api.artic.edu/api/v1/artworks?page=2&limit=50';
-// const artList = document.querySelector('.art-list');
-// const searchedArtList = document.querySelector('#searched-art-list');
-// const form = document.querySelector('form');
-// const input = document.querySelector('input');
-
-// const fetchArtItems = async () => {
-//   try {
-//     const response = await fetch(myApi, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Accept: 'application/json',
-//       },
-//     });
-//     const { data: artItems } = await response.json();
-//     renderArtItems(artItems);
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// };
-
-// const renderArtItems = (artItems) => {
-//   const artElements = artItems.map((artItem) => {
-//     const { title, image_id, thumbnail, artist_display } = artItem;
-//     const imageSrc = `https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`;
-//     const artListItem = document.createElement('li');
-//     artListItem.className = `artListItem`;
-//     artListItem.innerHTML = `
-//         <div class="art-item shadow">
-//             <img src='${imageSrc}' alt="${thumbnail.alt_text}" id="art-item-image">
-//             <h3 id="art-item-title">${title}</h3>
-//             <h4 id="art-item-artist-display">by: <span id='artist-name'>${artist_display}</span></h4>
-//             <div class='buttons'>
-//             <button id='like'>like</button>
-//             <button id='share'>share</button>
-//             <button id='download'>download</button>
-//             </div>
-//         </div>
-//         `;
-//     return { title, artist: artist_display, element: artListItem };
-//   });
-//   artList.append(...artElements.map((element) => element.element));
-// };
-
-// const searchArtItem = async (searchValue) => {
-//   const searchPath = `https://api.artic.edu/api/v1/artworks/search?q=${searchValue}&&fields=id`;
-//   try {
-//     const response = await fetch(searchPath);
-//     const { data: searchedItems } = await response.json();
-//     const promises = searchedItems.map(async (element) => {
-//       const apiPath = `https://api.artic.edu/api/v1/artworks/${element.id}`
-//     }
-//     )}
-//     catch(error){
-//         console.error(error.message);
-//     }
-// }
 
